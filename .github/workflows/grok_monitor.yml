@@ -1,0 +1,26 @@
+name: Monitor Grok
+
+on:
+  repository_dispatch:
+    types: [grok]
+  workflow_dispatch: # Permite ejecutarlo manualmente para probar
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Instalar dependencias
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi |
+          playwright install chromium
+
+      - name: Ejecutar script
+        run: python grok_monitor.py
