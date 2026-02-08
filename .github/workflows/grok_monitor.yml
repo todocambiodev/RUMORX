@@ -19,8 +19,10 @@ jobs:
 
       - name: Instalar dependencias
         run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi |
-          playwright install chromium
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Instalar navegador Chromium
+        run: playwright install chromium
 
       - name: Ejecutar script
         run: python grok_monitor.py
