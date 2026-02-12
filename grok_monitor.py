@@ -13,32 +13,39 @@ GROK_URL = "https://x.com/i/grok"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 VIEWPORT = {"width": 1280, "height": 800}
 
-PROMPT_TEMPLATE = """Puedes buscar rumores dentro de X (de usuarios verificados, reconocidos, de credibilidad alta y de relevancia) SOLO CON FECHAS DE HOY que puedan mover los mercados financieros de los futuros del Oro, SP500 y BTC el día de HOY?
+PROMPT_TEMPLATE = """Puedes buscar rumores dentro de X (de usuarios verificados, reconocidos, de credibilidad alta y de relevancia) SOLO CON FECHAS DE HOY que puedan mover los mercados financieros de los futuros del Oro (GC1!), DXY (DX1!), SP500 (ES1!) y BTC (DEL CME) el día de HOY?
 Identifica los o el más relevantes y respóndeme únicamente con un JSON estructurado de la siguiente manera:
 
-{{
-  "gold": {{
+{
+  "gold": {
     "titulo": "Titulo del rumor o noticia que mueva los futuros del oro",
     "razon": "Rumor o noticia que mueva los futuros del oro",
     "nivel": "Nivel de la noticia/rumor (CRITICA/NORMAL/NEUTRAL)",
     "precio": "Precio del oro justo en este momento",
     "sentimiento": "BUY/SELL/NEUTRAL"
-  }},
-  "sp500": {{
+  },
+  "dxy": {
+    "titulo": "Titulo del rumor o noticia que mueva los futuros del dxy",
+    "razon": "Rumor o noticia que mueva los futuros del dxy",
+    "nivel": "Nivel de la noticia/rumor (CRITICA/NORMAL/NEUTRAL)",
+    "precio": "Precio del dxy justo en este momento",
+    "sentimiento": "BUY/SELL/NEUTRAL"
+  },
+  "sp500": {
     "titulo": "Titulo del rumor o noticia que mueva los futuros del SP500",
     "razon": "Rumor o noticia que mueva los futuros del SP500",
     "nivel": "Nivel de la noticia/rumor (CRITICA/NORMAL/NEUTRAL)",
     "precio": "Precio del SP500 justo en este momento",
     "sentimiento": "BUY/SELL/NEUTRAL"
-  }},
-  "btc": {{
+  },
+  "btc": {
     "titulo": "Titulo del rumor o noticia que mueva los futuros del BTC",
     "razon": "Rumor o noticia que mueva los futuros del BTC",
     "nivel": "Nivel de la noticia/rumor (CRITICA/NORMAL/NEUTRAL)",
     "precio": "Precio del BTC justo en este momento",
     "sentimiento": "BUY/SELL/NEUTRAL"
-  }}
-}}
+  }
+}
 Traduce al español los campos titulo y razon.
 """
 URL_GOLD = "https://script.google.com/macros/s/AKfycbyJyyN7WFPtao1u_y8jgwsaKVYf2j8TL4vtg-Xe3kAotmBsUAEyFFjt2K-NgHauYxJjHw/exec"
@@ -94,6 +101,7 @@ async def wait_for_grok_response(page: Page, timeout_ms: int = 300000) -> str:
             stable_iterations += 1
             if stable_iterations >= 4:
                 print(f"\n[+] Respuesta completada ({current_len} caracteres).")
+                await page.close()
                 return target_text
         else:
             stable_iterations = 0
@@ -272,3 +280,4 @@ if __name__ == "__main__":
         asyncio.run(monitor_markets(force_login=args.login, headful=args.headful))
     except KeyboardInterrupt:
         print("\n[!] Abortado por el usuario.")
+
