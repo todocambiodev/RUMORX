@@ -59,7 +59,7 @@ def extract_json(text: str) -> Optional[Dict[str, Any]]:
     except json.JSONDecodeError:
         return None
 
-async def wait_for_grok_response(page: Page, timeout_ms: int = 90000) -> str:
+async def wait_for_grok_response(page: Page, timeout_ms: int = 300000) -> str:
     """Espera de forma inteligente a que Grok termine de escribir la respuesta."""
     print("[*] Esperando respuesta de Grok (streaming)...")
     
