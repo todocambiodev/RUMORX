@@ -7,13 +7,13 @@ from playwright.async_api import async_playwright, Page
 # CONFIGURATION & CONSTANTS
 # =================================================================
 STORAGE_STATE_PATH = Path("storage_state.json")
-GROK_URL = "https://x.com/i/grok"
+GROK_URL = "https://x.com/i/grok?conversation=2022340214048383217"
 
 # Modern Stealth User-Agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 VIEWPORT = {"width": 1280, "height": 800}
 
-PROMPT_TEMPLATE = """Puedes buscar rumores dentro de X (de usuarios verificados, reconocidos, de credibilidad alta y de relevancia) SOLO CON FECHAS DE HOY que puedan mover los mercados financieros de los futuros del Oro (GC1!), DXY (DX1!), SP500 (ES1!) y BTC (DEL CME) el día de HOY?
+PROMPT_TEMPLATE = """Puedes buscar rumores dentro de X (de usuarios verificados, reconocidos, de credibilidad alta y de relevancia) de último minuto que puedan mover los mercados financieros de los futuros del Oro (GC1!), DXY (DX1!), SP500 (ES1!) y BTC (DEL CME) el día de HOY?
 Identifica los o el más relevantes y respóndeme únicamente con un JSON estructurado de la siguiente manera:
 
 {
@@ -280,4 +280,3 @@ if __name__ == "__main__":
         asyncio.run(monitor_markets(force_login=args.login, headful=args.headful))
     except KeyboardInterrupt:
         print("\n[!] Abortado por el usuario.")
-
