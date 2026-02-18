@@ -257,7 +257,7 @@ async def monitor_markets(force_login: bool = False, headful: bool = False):
                 print(json.dumps(data, indent=2, ensure_ascii=False))
                 print("═"*50 + "\n")
                 enviar_noticia_a_gsheets(modelo="Grok 4", url=URL_GOLD, noticia=data["gold"])
-                #enviar_noticia_a_gsheets(modelo="Grok 4", url=URL_SP500, noticia=data["sp500"])
+                enviar_noticia_a_gsheets(modelo="Grok 4", url=URL_SP500, noticia=data["sp500"])
                 #enviar_noticia_a_gsheets(modelo="Grok 4", url=URL_BTC, noticia=data["btc"])
             else:
                 print("[-] No se pudo extraer JSON. Respuesta cruda:")
