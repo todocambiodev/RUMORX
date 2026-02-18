@@ -7,7 +7,7 @@ from playwright.async_api import async_playwright, Page
 # CONFIGURATION & CONSTANTS
 # =================================================================
 STORAGE_STATE_PATH = Path("storage_state.json")
-GROK_URL = "https://x.com/i/grok?conversation=2022340214048383217"
+GROK_URL = "https://x.com/i/grok?conversation=2024113740904362311"
 
 # Modern Stealth User-Agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
@@ -197,7 +197,7 @@ async def monitor_markets(force_login: bool = False, headful: bool = False):
             try:
                 # 1. Esperamos a que el usuario llegue al Home o cualquier página que indique login
                 print("[*] Verificando sesión (detectando navegación al Home)...")
-                await page.wait_for_selector("[data-testid='SideNav_NewTweet_Button']", timeout=30000)
+                await page.wait_for_selector("[data-testid='SideNav_NewTweet_Button']", timeout=60000)
                 print("[+] Login verificado.")
                 
                 # 2. Navegamos automáticamente a Grok
@@ -219,19 +219,19 @@ async def monitor_markets(force_login: bool = False, headful: bool = False):
         else:
             # Modo Automatizado: Ya tenemos el browser y la page listos
             print("[*] Iniciando monitoreo automatizado...")
-            await page.goto(GROK_URL)
+            await page.goto(GROK_URL, wait_until="domcontentloaded")
         
         try:
             # Selectores verificados por investigación dinámica
             input_selector = 'textarea[placeholder="Ask anything"]'
             send_button_selector = 'button[aria-label="Grok something"]'
             
-            await page.wait_for_load_state("domcontentloaded")
+            await page.wait_for_load_state("load")
             await asyncio.sleep(2)
             
             # Esperar al input visible
             print(f"[*] Localizando campo de entrada...")
-            await page.wait_for_selector(input_selector, timeout=20000)
+            await page.wait_for_selector(input_selector, timeout=63000)
             
             print(f"[*] Introduciendo prompt en Grok...")
             await page.click(input_selector)
@@ -280,3 +280,4 @@ if __name__ == "__main__":
         asyncio.run(monitor_markets(force_login=args.login, headful=args.headful))
     except KeyboardInterrupt:
         print("\n[!] Abortado por el usuario.")
+
