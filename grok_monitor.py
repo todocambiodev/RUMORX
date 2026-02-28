@@ -7,7 +7,7 @@ from playwright.async_api import async_playwright, Page
 # CONFIGURATION & CONSTANTS
 # =================================================================
 STORAGE_STATE_PATH = Path("storage_state.json")
-GROK_URL = "https://x.com/i/grok?conversation=2027381932070146188"
+GROK_URL = "https://x.com/i/grok?conversation=2027732768491200517"
 
 # Modern Stealth User-Agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
