@@ -13,8 +13,8 @@ GROK_URL = "https://x.com/i/grok?conversation=2027381932070146188"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 VIEWPORT = {"width": 1280, "height": 800}
 
-PROMPT_TEMPLATE = """Puedes buscar rumores dentro de X (de usuarios verificados, reconocidos, de credibilidad alta y de relevancia) de último minuto que puedan mover los mercados financieros de los futuros del Oro (GC1!), DXY (DX1!), SP500 (ES1!) y BTC (DEL CME) el día de HOY?
-Identifica los o el más relevantes y respóndeme únicamente con un JSON estructurado de la siguiente manera:
+PROMPT_TEMPLATE = """Puedes buscar rumores dentro de X de último minuto que puedan mover los mercados financieros (en especial los futuros de EE.UU.) el día de HOY?
+Busca problemas geopolíticos, noticias económicas, desastres naturales, guerras, problemas bélicos, etc.Identifica los o el más relevantes y respóndeme únicamente con un JSON estructurado de la siguiente manera:
 
 {
   "gold": {
